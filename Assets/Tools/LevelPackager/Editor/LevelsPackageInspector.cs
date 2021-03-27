@@ -83,8 +83,7 @@ namespace RunAndJump.LevelPackager {
 			if (_myTarget.hasChanges) {
 				EditorGUILayout.HelpBox ("The list has changes!", MessageType.Warning);
 			}
-			if (GUILayout.Button ("Commit Levels", GUILayout.Height (30))) {
-				EditorUtils.Commit(_myTarget, CommitSuccessCb, CommitErrorCb);
+			if (GUILayout.Button ("Commit Levels", GUILayout.Height (30))) {EditorUtils.Commit(_myTarget, CommitSuccessCb, CommitErrorCb);
 			}
 		}
 

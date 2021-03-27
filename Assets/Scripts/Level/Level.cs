@@ -17,6 +17,14 @@ namespace RunAndJump
         [SerializeField]
         private int _totalRows = 10;
         public const float GridSize = 1.28f;
+        [SerializeField]
+        private LevelPiece[] _pieces;
+        public LevelPiece[] Pieces
+        {
+            get { return _pieces; }
+            set { _pieces = value; }
+        }
+
 
         private readonly Color _normalColor = Color.grey;
         private readonly Color _selectedColor = Color.yellow;
