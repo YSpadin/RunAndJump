@@ -5,6 +5,7 @@ namespace RunAndJump.LevelCreator
 {
     public class PaletteWindow : EditorWindow
     {
+        private GUIStyle _tabStyle;
         private string _path = "Assets/Prefabs/LevelPieces";
         private List<PaletteItem> _items;
         private Dictionary<PaletteItem.Category, List<PaletteItem>> _categorizedItems;
@@ -38,7 +39,12 @@ preview);
                 InitContent();
             }
         }
-
+        private void InitStyles()
+        {
+            _tabStyle = new GUIStyle();
+            _tabStyle.alignment = TextAnchor.MiddleCenter;
+            _tabStyle.fontSize = 16;
+        }
         private void InitContent()
         {
             Debug.Log("InitContent called...");

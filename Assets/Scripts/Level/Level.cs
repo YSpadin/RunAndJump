@@ -7,12 +7,12 @@ namespace RunAndJump
         [SerializeField]
         public int _totalTime = 60;
         [SerializeField]
-        private float _gravity = -30;
-        [SerializeField]
-        private AudioClip _bgm;
-        [SerializeField]
-        private Sprite _background;
-        [SerializeField]
+      // private float _gravity = -30;
+      // [SerializeField]
+      // private AudioClip _bgm;
+      // [SerializeField]
+      // private Sprite _background;
+      //  [SerializeField]
         private int _totalColumns = 25;
         [SerializeField]
         private int _totalRows = 10;
@@ -25,7 +25,13 @@ namespace RunAndJump
             set { _pieces = value; }
         }
 
-
+        [SerializeField]
+        private LevelSettings _settings;
+        public LevelSettings Settings
+        {
+            get { return _settings; }
+            set { _settings = value; }
+        }
         private readonly Color _normalColor = Color.grey;
         private readonly Color _selectedColor = Color.yellow;
 
@@ -37,20 +43,41 @@ namespace RunAndJump
 
         public float Gravity
         {
-            get { return _gravity; }
-            set { _gravity = value; }
+            get { return ((_settings != null) ? _settings.gravity : 0); }
+            set
+            {
+                if (_settings != null)
+                {
+                    _settings.gravity = value;
+                }
+            }
         }
 
         public AudioClip Bgm
         {
-            get { return _bgm; }
-            set { _bgm = value; }
+            get { return (_settings != null) ? _settings.bgm : null; }
+            set
+            {
+                if (_settings != null)
+                {
+                    _settings.bgm = value;
+                }
+            }
         }
 
         public Sprite Background
         {
-            get { return _background; }
-            set { _background = value; }
+            get
+            {
+                return (_settings != null) ? _settings.background : null;
+            }
+            set
+            {
+                if (_settings != null)
+                {
+                    _settings.background = value;
+                }
+            }
         }
         public int TotalColumns
         {

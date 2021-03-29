@@ -17,7 +17,7 @@ namespace RunAndJump.LevelCreator
 
         private Mode _selectedMode;
         private Mode _currentMode;
-
+        private GUIStyle _titleStyle;
         private int _newTotalColumns;
         private int _newTotalRows;
         private Level _myTarget;
@@ -27,7 +27,23 @@ namespace RunAndJump.LevelCreator
         private PaletteItem _itemInspected;
         private int _originalPosX;
         private int _originalPosY;
+        private SerializedProperty _serializedTotalTime;
+        private SerializedObject _mySerializedObject;
 
+        private void InitStyles()
+        {
+            _titleStyle = new GUIStyle();
+            _titleStyle.alignment = TextAnchor.MiddleCenter;
+            _titleStyle.fontSize = 16;
+            Texture2D titleBg = (Texture2D)
+            Resources.Load("Color_Bg");
+            Font titleFont = (Font)
+            Resources.Load("Oswald-Regular");
+            _titleStyle.normal.background = titleBg;
+            _titleStyle.normal.textColor = Color.white;
+            _titleStyle.font = titleFont;
+        }
+        
         private void Move()
         {
             Vector3 gridPoint = _myTarget.WorldToGridCoordinates(_itemInspected.transform.position);
@@ -61,7 +77,7 @@ namespace RunAndJump.LevelCreator
             _myTarget = (Level)target;
             InitLevel();
             ResetResizeValues();
-
+            InitStyles();
         }
         private void UpdateCurrentPieceInstance(PaletteItem item, Texture2D preview)
         {
@@ -185,16 +201,27 @@ namespace RunAndJump.LevelCreator
             _myTarget.TotalColumns = _newTotalColumns;
             _myTarget.TotalRows = _newTotalRows;
         }
+
+        
+        
         private void DrawLevelDataGUI()
         {
-            EditorGUILayout.LabelField("Data", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Data", _titleStyle);
             EditorGUILayout.BeginVertical("box");
-            _myTarget.TotalTime = EditorGUILayout.IntField("Total Time", Mathf.Max(0, _myTarget.TotalTime));
-
-            _myTarget.Gravity = EditorGUILayout.FloatField("Gravity", _myTarget.Gravity);
-            _myTarget.Bgm = (AudioClip)EditorGUILayout.ObjectField("Bgm", _myTarget.Bgm, typeof(AudioClip), false);
-            _myTarget.Background = (Sprite)EditorGUILayout.ObjectField("Background", _myTarget.Background, typeof(Sprite), false);
+            EditorGUILayout.PropertyField(_serializedTotalTime);
+            _myTarget.Settings = (LevelSettings)EditorGUILayout.
+            ObjectField("Level Settings", _myTarget.Settings,
+            typeof(LevelSettings), false);
+            if (_myTarget.Settings != null)
+            {
+                Editor.CreateEditor(_myTarget.Settings).OnInspectorGUI();
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("You must attach a LevelSettingsasset!", MessageType.Warning);
+              }
             EditorGUILayout.EndVertical();
+            _myTarget.SetGravity();
         }
 
         private void DrawModeGUI()
