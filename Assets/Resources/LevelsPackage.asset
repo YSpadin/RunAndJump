@@ -19,6 +19,4 @@ MonoBehaviour:
     levelName: I was here
   - scene: {fileID: 102900000, guid: df8c8bab4eb904b10928751e682dd324, type: 3}
     levelName: Leap of Faith
-  - scene: {fileID: 102900000, guid: cd77a6d8fad59cb41bd1e505e7c411a7, type: 3}
-    levelName: MyLevel
   hasChanges: 1

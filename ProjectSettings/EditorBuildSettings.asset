@@ -23,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Leap_level.unity
     guid: df8c8bab4eb904b10928751e682dd324
-  - enabled: 1
-    path: Assets/Levels/Test_level.unity
-    guid: cd77a6d8fad59cb41bd1e505e7c411a7
   m_configObjects: {}
